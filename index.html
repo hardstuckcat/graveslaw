@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graves Law | Where Strategy Wins</title>
+  <style>
+    .brand-logo-img {
+      width: 58px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 0 24px rgba(140, 82, 255, 0.35));
+    }
+
+    .hero-logo-img {
+      width: min(260px, 78%);
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(0 0 46px rgba(140, 82, 255, 0.42));
+    }
+
+    :root {
+      --purple: #8c52ff;
+      --purple-dark: #5f2fd6;
+      --black: #08080c;
+      --charcoal: #111119;
+      --soft-black: #181824;
+      --white: #ffffff;
+      --muted: #b8b8c8;
+      --line: rgba(255, 255, 255, 0.11);
+      --gold: #d8c38a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      overflow: hidden;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+      background: rgba(8, 8, 12, 0.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1.5px solid var(--purple);
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      font-family: Georgia, serif;
+      font-size: 20px;
+      letter-spacing: -1px;
+      box-shadow: 0 0 32px rgba(140, 82, 255, 0.35);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-family: Georgia, serif;
+      font-size: 21px;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-text span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+
+    .nav-cta {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--purple);
+      color: var(--white) !important;
+      font-weight: 700;
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 150px 20px 90px;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(140, 82, 255, 0.28), transparent 32%),
+        radial-gradient(circle at 20% 80%, rgba(216, 195, 138, 0.09), transparent 30%),
+        linear-gradient(135deg, #08080c 0%, #111119 55%, #08080c 100%);
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 18px var(--purple);
+    }
+
+    h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(48px, 7vw, 86px);
+      line-height: 0.98;
+      letter-spacing: -3px;
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 34px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--purple);
+      color: var(--white);
+      box-shadow: 0 16px 36px rgba(140, 82, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: var(--purple-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border-color: var(--line);
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--purple);
+      transform: translateY(-2px);
+    }
+
+    .hero-card {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025));
+      padding: 28px;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+    }
+
+    .premium-logo-box {
+      min-height: 280px;
+      border-radius: 24px;
+      border: 1px solid rgba(140, 82, 255, 0.38);
+      background:
+        radial-gradient(circle at 50% 35%, rgba(140, 82, 255, 0.33), transparent 34%),
+        linear-gradient(135deg, rgba(140,82,255,0.13), rgba(255,255,255,0.03));
+      display: grid;
+      place-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .premium-logo-box::before {
+      content: "⚖";
+      position: absolute;
+      font-size: 250px;
+      color: rgba(255, 255, 255, 0.035);
+      transform: rotate(-8deg);
+    }
+
+    .premium-logo-box .inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .large-logo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 2px solid var(--purple);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+      font-family: Georgia, serif;
+      font-size: 48px;
+      box-shadow: 0 0 52px rgba(140, 82, 255, 0.42);
+    }
+
+    .premium-logo-box h2 {
+      font-family: Georgia, serif;
+      font-size: 34px;
+      letter-spacing: -1px;
+    }
+
+    .premium-logo-box p {
+      margin: 8px auto 0;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    section {
+      padding: 92px 20px;
+    }
+
+    .container {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .section-header {
+      max-width: 720px;
+      margin-bottom: 42px;
+    }
+
+    .section-header h2 {
+      font-family: Georgia, serif;
+      font-size: clamp(34px, 4vw, 54px);
+      line-height: 1.05;
+      letter-spacing: -1.8px;
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .services {
+      background: var(--charcoal);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.035);
+      padding: 28px;
+      min-height: 245px;
+      transition: 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(140, 82, 255, 0.45);
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      background: rgba(140, 82, 255, 0.15);
+      border: 1px solid rgba(140, 82, 255, 0.32);
+      display: grid;
+      place-items: center;
+      color: var(--purple);
+      font-size: 22px;
+      margin-bottom: 22px;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .retainer {
+      background:
+        linear-gradient(180deg, var(--black), var(--charcoal));
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .feature-panel {
+      border: 1px solid rgba(140, 82, 255, 0.35);
+      border-radius: 28px;
+      padding: 36px;
+      background: linear-gradient(135deg, rgba(140, 82, 255, 0.18), rgba(255,255,255,0.035));
+    }
+
+    .feature-panel h2 {
+      font-family: Georgia, serif;
+      font-size: 42px;
+      line-height: 1.08;
+      margin-bottom: 16px;
+    }
+
+    .feature-panel p {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .check-list {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    .check-list li {
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .check-list strong {
+      color: var(--white);
+    }
+
+    .about {
+      background: var(--charcoal);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--purple);
+      font-size: 30px;
+      font-family: Georgia, serif;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .contact {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(140, 82, 255, 0.2), transparent 35%),
+        var(--black);
+    }
+
+    .contact-box {
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 42px;
+      background: rgba(255, 255, 255, 0.04);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .contact-box h2 {
+      font-family: Georgia, serif;
+      font-size: 44px;
+      line-height: 1.08;
+      margin-bottom: 14px;
+    }
+
+    .contact-box p {
+      color: var(--muted);
+    }
+
+    .contact-methods {
+      display: grid;
+      gap: 14px;
+    }
+
+    .method {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .method strong {
+      display: block;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 20px;
+      color: var(--muted);
+      background: var(--black);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner,
+      .split,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-3,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 125px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="Graves Law Home">
+          <img class="brand-logo-img" src="Graves_Logo_Purple-Stacked.png" alt="Graves Law logo" />
+          <div class="brand-text">
+            <strong>Graves Law</strong>
+            <span>Where Strategy Wins</span>
+          </div>
+        </a>
+        <div class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#retainers">Retainers</a>
+          <a href="#about">About</a>
+          <a href="#contact" class="nav-cta">Request Counsel</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero" id="top">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow"><span></span> Strategic legal counsel for San Andreas</div>
+          <h1>Law made simple.</h1>
+          <p>
+            Graves Law provides professional representation, legal filings, criminal defense support, civil litigation strategy, and ongoing retainer counsel for individuals and organizations seeking serious legal protection.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Schedule Consultation</a>
+            <a href="#services" class="btn btn-secondary">View Services</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="premium-logo-box">
+            <div class="inner">
+              <img class="hero-logo-img" src="Graves_Logo_Purple-Stacked.png" alt="Graves Law logo" />
+              <p>Legal Defense • Filings • Litigation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-header">
+          <h2>Focused legal services for serious matters.</h2>
+          <p>Minimal noise. Strong positioning. Every service is designed around strategy, preparation, and protecting the client’s interests.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="icon">⚖</div>
+            <h3>Legal Defense</h3>
+            <p>Representation and defense strategy for clients facing criminal charges, investigations, or legal exposure within the State of San Andreas.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">§</div>
+            <h3>Court Filings</h3>
+            <p>Professional preparation and filing support for expungements, appeals, name changes, divorces, agreements, motions, and other legal documents.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">◆</div>
+            <h3>Civil Litigation</h3>
+            <p>Strategic claims, lawsuits, negotiations, settlement positioning, and courtroom preparation for clients whose rights or interests were violated.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="retainer" id="retainers">
+      <div class="container">
+        <div class="section-header">
+          <h2>Retainer programs built for serious protection.</h2>
+          <p>Whether you need personal representation or ongoing organizational counsel, Graves Law offers premium retainer coverage designed around responsiveness, preparation, and strategic legal support.</p>
+        </div>
+
+        <div class="grid-3" style="grid-template-columns: repeat(2, 1fr);">
+          <article class="card" style="min-height: auto; padding: 38px; background: linear-gradient(135deg, rgba(140,82,255,0.16), rgba(255,255,255,0.03)); border-color: rgba(140,82,255,0.28);">
+            <div class="icon">♛</div>
+            <h3>Individual Executive Retainer</h3>
+            <p style="margin-bottom: 24px;">
+              Priority legal support for individuals seeking ongoing representation, rapid response counsel, litigation preparation, filings, and direct strategic guidance.
+            </p>
+
+            <ul class="check-list">
+              <li><strong>Priority Access:</strong> Direct access to Graves Law for active legal matters and urgent situations.</li>
+              <li><strong>Comprehensive Representation:</strong> Criminal defense, filings, negotiations, and strategic litigation support.</li>
+              <li><strong>Legal Guidance:</strong> Ongoing advisory services designed to minimize legal exposure and strengthen positioning.</li>
+              <li><strong>Premium Client Handling:</strong> Retainer clients receive priority scheduling and accelerated response times.</li>
+            </ul>
+          </article>
+
+          <article class="card" style="min-height: auto; padding: 38px; background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(140,82,255,0.12)); border-color: rgba(140,82,255,0.28);">
+            <div class="icon">⚖</div>
+            <h3>Business & Organization Retainer</h3>
+            <p style="margin-bottom: 24px;">
+              Ongoing legal support for businesses and organizations requiring dependable counsel, contract assistance, compliance guidance, litigation defense, and operational risk management.
+            </p>
+
+            <ul class="check-list">
+              <li><strong>General Legal Counsel:</strong> Consistent legal support and consultation tailored to your organization.</li>
+              <li><strong>Contract Review & Negotiation:</strong> Drafting, reviewing, and negotiating agreements to protect business interests.</li>
+              <li><strong>Employment & Compliance Guidance:</strong> Advisory support regarding internal policies, disputes, and organizational liability.</li>
+              <li><strong>Litigation Defense:</strong> Strategic representation when legal challenges or claims arise.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="container split">
+        <div class="section-header">
+          <h2>Built for reputation, leverage, and results.</h2>
+          <p>Graves Law approaches every matter with preparation first. Whether the issue involves criminal defense, civil claims, or legal filings, the firm’s role is to create leverage, protect the client, and present the strongest possible position.</p>
+        </div>
+
+        <div>
+          <div class="stats">
+            <div class="stat">
+              <strong>01</strong>
+              <span>Strategy before action</span>
+            </div>
+            <div class="stat">
+              <strong>02</strong>
+              <span>Professional filings</span>
+            </div>
+            <div class="stat">
+              <strong>03</strong>
+              <span>Premium client service</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div>
+            <h2>Ready to take the next step?</h2>
+            <p>Contact Graves Law to request representation, discuss a filing, or inquire about ongoing retainer coverage.</p>
+          </div>
+
+          <div class="contact-methods">
+            <div class="method">
+              <strong>Phillip Graves</strong>
+              Phone: 346-9085<br>
+              Email: hardstuckcat
+            </div>
+
+            <div class="method">
+              <strong>Bren Vaught</strong>
+              Phone: 321-8395<br>
+              Email: Limerick1.
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <span>© 2026 Graves Law. All rights reserved.</span>
+        <span>Where Strategy Wins</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
