@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Graves Law | Where Strategy Wins</title>
+  <style>
+    .brand-logo-img {
+      width: 58px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 0 24px rgba(140, 82, 255, 0.35));
+    }
+
+    .hero-logo-img {
+      width: min(260px, 78%);
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      filter: drop-shadow(0 0 46px rgba(140, 82, 255, 0.42));
+    }
+
+    :root {
+      --purple: #8c52ff;
+      --purple-dark: #5f2fd6;
+      --black: #08080c;
+      --charcoal: #111119;
+      --soft-black: #181824;
+      --white: #ffffff;
+      --muted: #b8b8c8;
+      --line: rgba(255, 255, 255, 0.11);
+      --gold: #d8c38a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      overflow: hidden;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 20;
+      background: rgba(8, 8, 12, 0.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1.5px solid var(--purple);
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      font-family: Georgia, serif;
+      font-size: 20px;
+      letter-spacing: -1px;
+      box-shadow: 0 0 32px rgba(140, 82, 255, 0.35);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-family: Georgia, serif;
+      font-size: 21px;
+      letter-spacing: 0.5px;
+    }
+
+    .brand-text span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+    }
+
+    .nav-cta {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--purple);
+      color: var(--white) !important;
+      font-weight: 700;
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 150px 20px 90px;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(140, 82, 255, 0.28), transparent 32%),
+        radial-gradient(circle at 20% 80%, rgba(216, 195, 138, 0.09), transparent 30%),
+        linear-gradient(135deg, #08080c 0%, #111119 55%, #08080c 100%);
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--purple);
+      box-shadow: 0 0 18px var(--purple);
+    }
+
+    h1 {
+      font-family: Georgia, serif;
+      font-size: clamp(48px, 7vw, 86px);
+      line-height: 0.98;
+      letter-spacing: -3px;
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 34px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--purple);
+      color: var(--white);
+      box-shadow: 0 16px 36px rgba(140, 82, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: var(--purple-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border-color: var(--line);
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--purple);
+      transform: translateY(-2px);
+    }
+
+    .hero-card {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025));
+      padding: 28px;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+    }
+
+    .premium-logo-box {
+      min-height: 280px;
+      border-radius: 24px;
+      border: 1px solid rgba(140, 82, 255, 0.38);
+      background:
+        radial-gradient(circle at 50% 35%, rgba(140, 82, 255, 0.33), transparent 34%),
+        linear-gradient(135deg, rgba(140,82,255,0.13), rgba(255,255,255,0.03));
+      display: grid;
+      place-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .premium-logo-box::before {
+      content: "⚖";
+      position: absolute;
+      font-size: 250px;
+      color: rgba(255, 255, 255, 0.035);
+      transform: rotate(-8deg);
+    }
+
+    .premium-logo-box .inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .large-logo {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 2px solid var(--purple);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+      font-family: Georgia, serif;
+      font-size: 48px;
+      box-shadow: 0 0 52px rgba(140, 82, 255, 0.42);
+    }
+
+    .premium-logo-box h2 {
+      font-family: Georgia, serif;
+      font-size: 34px;
+      letter-spacing: -1px;
+    }
+
+    .premium-logo-box p {
+      margin: 8px auto 0;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    section {
+      padding: 92px 20px;
+    }
+
+    .container {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .section-header {
+      max-width: 720px;
+      margin-bottom: 42px;
+    }
+
+    .section-header h2 {
+      font-family: Georgia, serif;
+      font-size: clamp(34px, 4vw, 54px);
+      line-height: 1.05;
+      letter-spacing: -1.8px;
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .services {
+      background: var(--charcoal);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.035);
+      padding: 28px;
+      min-height: 245px;
+      transition: 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(140, 82, 255, 0.45);
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      background: rgba(140, 82, 255, 0.15);
+      border: 1px solid rgba(140, 82, 255, 0.32);
+      display: grid;
+      place-items: center;
+      color: var(--purple);
+      font-size: 22px;
+      margin-bottom: 22px;
+    }
+
+    .card h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .retainer {
+      background:
+        linear-gradient(180deg, var(--black), var(--charcoal));
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .feature-panel {
+      border: 1px solid rgba(140, 82, 255, 0.35);
+      border-radius: 28px;
+      padding: 36px;
+      background: linear-gradient(135deg, rgba(140, 82, 255, 0.18), rgba(255,255,255,0.035));
+    }
+
+    .feature-panel h2 {
+      font-family: Georgia, serif;
+      font-size: 42px;
+      line-height: 1.08;
+      margin-bottom: 16px;
+    }
+
+    .feature-panel p {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .check-list {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    .check-list li {
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .check-list strong {
+      color: var(--white);
+    }
+
+    .about {
+      background: var(--charcoal);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--purple);
+      font-size: 30px;
+      font-family: Georgia, serif;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .contact {
+      background:
+        radial-gradient(circle at 50% 0%, rgba(140, 82, 255, 0.2), transparent 35%),
+        var(--black);
+    }
+
+    .contact-box {
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 42px;
+      background: rgba(255, 255, 255, 0.04);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .contact-box h2 {
+      font-family: Georgia, serif;
+      font-size: 44px;
+      line-height: 1.08;
+      margin-bottom: 14px;
+    }
+
+    .contact-box p {
+      color: var(--muted);
+    }
+
+    .contact-methods {
+      display: grid;
+      gap: 14px;
+    }
+
+    .method {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .method strong {
+      display: block;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 20px;
+      color: var(--muted);
+      background: var(--black);
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner,
+      .split,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-3,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 125px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="nav">
+      <div class="nav-inner">
+        <a class="brand" href="#top" aria-label="Graves Law Home">
+          <img class="brand-logo-img" src="data:image/png;base64,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" alt="Graves Law logo" />
+          <div class="brand-text">
+            <strong>Graves Law</strong>
+            <span>Where Strategy Wins</span>
+          </div>
+        </a>
+        <div class="nav-links">
+          <a href="#services">Services</a>
+          <a href="#retainers">Retainers</a>
+          <a href="#about">About</a>
+          <a href="#contact" class="nav-cta">Request Counsel</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero" id="top">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow"><span></span> Strategic legal counsel for San Andreas</div>
+          <h1>Law made simple.</h1>
+          <p>
+            Graves Law provides professional representation, legal filings, criminal defense support, civil litigation strategy, and ongoing retainer counsel for individuals and organizations seeking serious legal protection.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Schedule Consultation</a>
+            <a href="#services" class="btn btn-secondary">View Services</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="premium-logo-box">
+            <div class="inner">
+              <img class="hero-logo-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALAAAAECCAYAAABewl2UAAAACXBIWXMAAAsSAAALEgHS3X78AAAZ3ElEQVR4nO2dT4wcx3XGPwVGNg6CntVlk8tyJ4B4W3FXUU6iCI5zk0SAIyAHWTTA1iWWlINWh4EiXzi6RAj64NUhspAcPDxQ1s1DgDZPkWdhSSc72pXoEwVohrzERBDvDALbDBIzh6qeqenpqq7+U1VdPe8HDJbsme6qmf761XtVr6oee/ToEQjCV/7IdQUIogwkYMJrSMCE15CACa8hARNeQwImvIYETHgNCZjwGhIw4TUkYMJrSMCE13zDdQWaSBSgA6DNXwAwAnDam+HYTY2ay2OUzFOMKMAmgH0shNrhf3cyTj0BMAZwzF9jEnZxSMAZCEKNxRr/u1VxURMwYY/433FvhlHFZTQOEnAKUYA+mEW96LYmABbCPuzNMHRcl9pBQVw6HdRDvABzSS6CWX0iAQmY8BqveyEkgdRxb4YDd7WqJ1GANoAhGhZAeiFgi4FUlUywaOH+GMCfO6wLwH63Pf66HB+MAgCsZ+QUHgaQtRIwtxJtYKkfNa8vullhlbL4HYAHYL/jnwJ4XHhP1Z0Wi/sPGZ+zxR7/O/+tubDFnpFTcMvdm+HUau0UOBFwFCxZ0jaKCVXGXvZHcvMbAL8F8L8AtgB8kx//JooJUHbOrwH8D5iwxXKqoEgQuINFEDknCjCF4IZg4Y6My1UxP0YFzEekks2/CYGVImH5NwH8BZh1jQX0OJatqylkbsZvAHS5VRzzV15LWGXL1AITdVLYAHCERR1HMCxsI/3AUYABgKuVX1ifx9NuLrf8myjnotSJNEuYKmzet33NZuUEJr3ZfFi9UkxZ4K8MXVeXv40C/CdqbvkrII8lfMZmxWxhSsA2u2bSAql/tVh+XRGFLVpeFwGksfEGUwL+bwPXFAOpAAuftGggta7oBJBV/57/VfH15pgS8LjEub8GE2ky4rcVSK0rqgAyrQcmD8a63Ywl80QB/gPqznuTTzxhHlUfeJLPezP8lYlKmOxG+wP/G/tcydEo1yNTRDlkrlssbPGe/5+pSpgU8J/xv2Rd14s0Yf+bqcJMCvjf4XcfaxnE3AJxIKfOuRsm+b2pC9cqF8JDck0PKjENyXeMBXEkYD2SgwKFJmjyEbJR2nuJiaBNG3wxNi5gUsAj+OVCiMOy89RCWwkqsvTFROJTPBTu0+9qlHW0wHGKYGb+QB3glv4YWJ4PV1Hqqfc0WcDWZ/kmkoVifxcwkE/LW4YxEi6JIOzaJP+b/N1NDmR0APzMyMWXsbrOQkIgYmZb3kDsCAtRj1EsRVKbxKyWMvXOTW+Gx0xd2ycBVxJI6ZDSW2AzqIp98TEWD+apSSuWCCA7YAKv7Luuk4CTN28Eg4FUSsJ93QMk0X+PA02TD3LSDWkjv7CPejN0Kq2YgNGFTaIAsotrJ2JXUIe0JPYmDiqkzV8z8vDnDCC9FvAYFgIpSeDSRvMHCHQR44QxDPnbkvtw2puhW2U5It4sLSUJQir11dYUMbYw7m9XTe0EnDIiVXe/tKmkxSO1WyLWiYATwVMbzfVLm0raYJCTafWmfeBNAAdYFiv5pc1GzMQ77c1waLIw0wLuwM5gBlFTTPYBA+ZXp6xlfgFhjSPTBRgVcN0cfqJ50PrAhEmMt8A2BDy1UAZRT4y3wDYETG4EYQxyIQiTNMKFoJ6I9YVcCIJQQS4EYZKx6QJsCHhsoQyihtjIjSABE15DLgRhiomNQiiII0wxtlGI8XUhejOc8j0bvGH7AtA6w15b54ANx1nKd26wF7FKkxc20WbrHHD2BSbc7WdX33/wJfBQGBBP+0zV3P8EuP9zVvaDL8yXZwArLa8tAR+hZtOCts4Bu1eAs5eAYHtxfHYfuHuLi+cLYHov/fyNFnDmAhN98hpl+Oxd4BfvLz8wnmJlAGvtLPD2BeD826tW9P4nwKfvMuHq8HDKhH73FvDxW0zEz7wNbD1ZrF4PZ8BHz3trbZ1hS8DOh5Nlwn3wJfDxP+gLV0Ys5qdfB85/D9jI6fd/+o+NE+/IRiG2utGc9URstIAXfwS89JNV8X72LnD9fHnxivzyfeD6M+zB0GV2n51H5KfR/cBnLwHf/RXwxAvLxx/OgI9eYC6DCab3uDugKeK7t8zUwzFjG4XYEvDYUjlznvsA6H642pTHvmaVVjeNh1N9ET907mBVj60p9o0T8EYLuPopsPvy6nu2A6WHU2D4bVauinuf2KlPE2mUC7HRAl76qbwn4OO37AdK03vA7VftllkDTmwV1JggLku8dz50N5p19xbrplsjrDlFVgRsev+JLPHO7jPr65I1tMJWsOlCGBtbev4D9QDCx2+5H9ma3mOtwJowslWQTQEbcSPOv73aTSZy/5P6dFNRX2/1eB3EbZ1jw7cqTPX1FuHBF/kGODymWT4wZ1z1BZ/7gfr92X3z/b15WZO0SGsjr94K+OnXsxNnfvHPVZZYDV/VxJ1pCl66EBstljCTRR2t3fQeaxkaTiMt8KiqC/3169nZXl/9xH3Pg4x7NXNrqsbmtr1eWuCn/z77M3UWSd388oqxajZsJrSPq7jI7hW9XNs6j3w1fI6b1dRZaxa4quyk3SvZn3k4a1xyOCHBKxdio6U3oZLE65RmWmBOqSyls5f0PtdwH7PuWM1uti3gUl9u+4Le52QziQkrkIBlnCEB+0CjXYjCX26jpb/2wszKqlxEHfAmiNs6p/9ZssBOabQFHhU9seiCIYRdbI7CAR5Z4D+hbcB9wPrgvW0Bj4ueuLFZYS0IU1hfwMaqgMuMxpELQaThjQtBeEGzLTDH+A7mhDOsrzFEFpiokrHtAl2sD3yMAotdP/jSzsroeahq+4EHX9Q3+T4nY9sFuhBwoWYmzwJ4W+fsZKTtXgGefq38dT56gRKQiuLChSgk4N/nsFC2NmX5+C0gCoB/2QVuv1bvJHob9Gb2FjSJcSHgQpFqnvUUWmeKlFCc6T02w+Kj55mY113INvEmiMvjEtgWsEi8uPXtClwLz7C2IqWIdQEXbWYeTvWno+vmDZvkzg2298Ya4WSZbm8sMKA/07i1Y7Yeuvzy/bVYAyJm7KJQVwIu1NzoRurBtls3QqSOqwMZYuyiUFcCLtTc5Fllsg5uBLA2i/kBa+ZCjIuc9HDKVtzRoS4CXiOcbKXmlYAB/QVBdGcwE37jnYDv3tILjDYCErFNXAxiAB4KGGDbsurwBAm48XgVxMXcuaFnhc9esjes7CMbLRYrVPAbOUuRdSLg3qy8w69jhTcCthQrkc6ZC2wP6TwzvuuGy4GMUgmEd27o5RzsfqdMKc2mwp4aZ5u5uxRw6S99+9XsbVyDbbYdAbFKHORWkMrpbLdnr4aSk0zv6W1geP575Asn2b6gv9KRBmtpgUdVXOTOjewNBDcCvT011onzfHuyikYKyQKX4far2Tfi6ddodC7m7KXF9KyKpjKRBS7LR89ni/jFH5ErsdECnvtg8f8q1pGzvZyUSCMsMMAsSZaINwK2KbhNEZ+p2UTUl366vMdIBSt5Oklkj3EmYBNDj7GIVd1rW0+yzcFtUac+1udSNkXPM9dQgjPrCzTIAsfEIlYFdk+8YMcSt86oNyK3xUaLuU+7L6++V0EQ58z/BdwL2NgQ5O1XgeHL8n7i7WeZiE0mvv/NP5m7ti5b59j3NPggrbUFHpu8+N1bwPVn5DnEW08CVz8zk7W2e8W99T3/NhOvamHECgYxRqWvUALXAjbe/EzvAT/+NrPGaQlAGwHQ/bBaa7x7BXjuB9Vcq2j53/0V8MzbeptClsSpC+FiZR6Rka2C7t5ir90rbFAjOQq1/Szwd3eY73znRjHL1DrD3AYXlrd1hn233e/oj7BV4P9OXHahAY4F3JvhOAowAWBtHnG8zev2BX7DE4HN7svsNbvPBH//52xNCll/6dY51kSfvWRXuK0zrOztC+zhK7J+cgWDGMPSVyjJY48ePXJagSjAIYA3XJW/0eIjUxdYeqHKeolb2G6dq655fvBlPjFVtcjhnQ9ZsFuCp6pIjS1DHQS8D+Bzp5UQiC3b1pNAsLPwi6sUbF347F3g03cLnz7pzdCurjbFcC5gAIgCHAPYc10PIhdv9mY4dF0J170QMc5/CCIXUwAD15UAaiLg3gwDALS/pj8cuu59iKmFgDkHritAaDFFjVrM2gi4N8MQtAGMD/TrYn2BGgmYQ1a43pzUIXATqZWAeZ/iO67rQUgJXVcgSS260ZJQt1otqUW3WZJaWWCBLhxsHE1IOaqjeIGaCpjvqdx1XQ8CAOverO29qKWAgfmUo1dc12PNmQLo1qnXIUltBQzMBziuu67HGtN1nayTRa0FDAC9GUKQiF3wiqs1f/NQewEDJGIHvMJbv9rjhYABErFFvBEv4JGAARKxBbwSL1DTgYwsXM/iaCBTAJ26B2xpeGWBY3ozHIC62KpiAk/FC3hqgWOiAB2wiYVrvmRfYU7AxFvbft4svBYwAEQB2mAiptyJfFznMYXXeOlCiPBh5w4ouNNlChGlasha4rUgXeW2CRKEAINluAXIp0TgCEvvq7aXhvgUV4F9A+HK9ZW1Peg8fBmoxGWWCRKEAfwDXX9agBEzCrO3JdERM0ygKL9GboA3gK622N3wOw31TxAg22wCLcGh9gfXzjRltdkbUQMDDvbjsEcNlxVUzzDm991oK1EXAMH/wYwOKKmJa4CeCAdyuuDWsn4JgGuRVr4y6ksbYCBoAowCaYW3HVdV0KMAWzuAPXFXHJWgs4hvvHffgh5Hhpp9qsT+YSErAAX6v4EMBF13VJgYSbAgk4BR7o9VEPIZNwFZCAFXCLfAA3rgUJVwMSsAaWfeQJmHAHJNxsSMA54L0WBzDT/XYCZm0HFV+30ZCAC8JTNw9QPpH+Opi1HZWt0zpCAi5JQT95AjYaOFi3kbOqIQFXBHcvulBb5ZtgonW+QWBTIAEbgFvlEEzQp1hYWwrKKoYETHhNYxPaifWABEx4DQmY8BoSMOE1JGDCa0jAhNeQgAmvIQETXkMCJryGBEx4DQmY8BoSMOE1JGDCa0jAhNd8w1ZBPEd2E5hv5E2sAXxCbBvAqYnFtY3kA/NKd/lrH2wC5AnYFxEnQ04AjAGMAAxVX5DPQWsXqM4xgGNTU3eiAEOwB3PYm+Ew47NtINfeFCPxYefruakYi5NCS/xmSU6zvptQ5ibYdwzBZqYc8bdiHUzB7skIGfdch0otcMqCICtrGySmqO/w10UA16IAN3szdCWXH4I9EKo9MK4Dc6GGEFagjIL5PLTK1lngrUq8XGub103FKX99P+NzU7CpScmbOwDmk0mTv8E7wErLNuKfVW0K+Y7w7w7ki7lkCjgK0OV1bPHrLm3hJayafxGLe15qt6TKLHDK7pnK3R+5dfhh4vB7fBNDVTl9yLcO+FbCYg2wOtlyAqBbRXOWcv0Xdea78Rv9Y8VHlL9DyvlvqixkFGAEiTB7MzyW+Gwb6aJ/SqOFjO+ndI3iKMABlh/gUgIuHcRFATajAMdY/cJ91RfmTd07icMjjSK1J0TyH2aSOLwDYMStZ2GESZwioWa9hlBvC6ZsIfj5U/7fI43mPc9vNuYPz1NY/u3asnN4yysaI2l9eF2PhEOlJrhW0QuRtsngRMdn4k/pRPh/5pcpYDnT6tGSHM9DF6vN+GUubB1U5cvcKJEx/xtqfDZ3a8N/Z3HHJ9UD30/8P+s3GAj/HuWpV5JSAubNeVrTlOepim/kzTJ1USC7eRd5c1mUMOfxJbhAZBvQ7GnUbQ+s+R3rlFcE7r92wIxMqoB5PZMaCDMuHevjpGw8UljAwjJLaeQR8DDxt2pU1qdd5IKSmxaj9OETFLLCgvtTthWREgVoRwE2ucC6gPRBaaccu8Z94lT4NU9QwT0vY4Gl64Pl6eflFmSKkk2J4vom1mIIsfBBk+xwn1AH0ZdNonoQOmDWq/J+VYE+uNXtzXCcFVyn8MMowFDRkvSB8uvAlRGwzELk3petN8OmwX7ajuLtouIOoW4mVe/N4Q+XzArtKALNEGat7z6qWYnzMoCvowCD5H3ozTCs4p6XEbBs+aS6rT7TlhyfFLFgvAsrDjiPJB+7miOYGyjeC1PKb4P99kZcLi5eVZ2S6PyGVwH8LAowUrkWRSgk4BxNZB0IJcfzNokxcWc9oL7ROj0JsbuV7OqLCVOOHYAFb5UaiijAPu/L/xw5Vtzk9VB1CYpcBHMtxlVpqNHJPPxHSgu2XimywB63qlfBhcv7sov4sElk7kArtvgCXVRofaMAj6IAj8CEqxqxU3GAfK7jDphFLu0GWUvmAXLnAiyN6xco6wCr/ZMTsK2pigogBAuexsKxIdL9xb0owL6mmzKAfHg55GUk3ZdKiEfihHsjDc4V1zjlxmKEfOslvxEFQIEAcY5VC8xv/BAsur2meLVRrFfiMApwzC3K97F6I8KSNz/EqrVUWRGtG8ObYVk/uDg4EsKQ78tH4PpYHrzIc/5pb4Z9sNFVWauUxhtl3ImiAi7cfcO7ZLqQ+33T3gxhwQh1gFWrm3y/EDy4WQmeuIWVfRctP5gzULzX5SK+DIO9D8DcyHSRT4Ti+X0wA5RHyGGRsoCCAuYWQ3bT2pqXkVmSMn2bxxl5BjslouAQ3AWJAvTFF+Sd/C3d8ni9Zb/pAS//yMaK7kJLqQXPh2kL55/mFHInbx1jyrgQ0v5LzfNNdrf1C76nIoTcrZEdj8/TRfab7oGJeJDjWmXpQzAmUYCOIh/5ACktQ0LI7ynKKrzxepkg7hCSqDUK0HE566I3wzgKcB3pwdVOFCDMEyByK9oCCwBTH7xEbrDIxShAW9NySn9T8KR5jWtUQkp9+5A/qPtQWFH+mx3wtM60NNJC7gpQwgLzL5hMh4zJ4/uZoq96L8dAA8C7iTL6XlXi0g3mxpAPjgxdbVHAe3QuQt5qdpDe5bcEd5PeTHlrVLRupXohePOQFrE6FzAXg6zZ2oGmqHiEvIdsl0cl4FCnLM4g53Gj8NYn7uJbiU+47xv39oRZ15Ok2RZuWaroRutgVcQ6wVIeCzgnI80wec0+FAMNmlY4/sGVn+XWUWY98wRzA6zWeVLSJSv6W4dYnTWTRMzXuFygS+ykTH9/aQELOaPJm3eYMetBZqXHGUV2dN/jdZOOciHDqvGRorhjfq/kLI7DHG5L0iINSpQL5IzyeSrlEAnxSh6i5LUHqu+ZEPgUJVvrSmclC6NfcZMyBZt/NhI+swkmqmSAdQQ2DWkECfzLD6EeKVqal8bLGyvOuQkWnI0T5/SxGlCd8M+u1FGzbidggynKrkL+oHwuHPrLot1nGlb0W8K/42AsLRhdmT/Hrz9M+Xzq90z8Rkdg2ijl11c+rV6YKxZikYdwAuY/tbGYXg2wLzEEslPruDXUtYBL+av8wcoKMDrC50c5r5+nbgB7CLJEfAw+LV2sWx4K1EvFWDb5Mlrsi7eP5dyTEywCtA7Y97kJdr8HVVTK+D5xEp/IyCIXRD2IhEVsREx0rdJGh4TXNDqdkmg+JGDCa0jAhNeQgAmvIQETXkMCJryGBEx4DQmY8BoSMOE1JGDCa0jAhNeQgAmvIQETXmN1aakqiRb7j+lybHJSpDDlfKCR29xGjrr3ZhjxPGvd3N5xXAfN87xNb/VWwMA8cT5rQbop2JScMQytRcFn48Y7J7WRPbmxDSxNV5IRbw02AuYzWbLOuck/NxaOxRMM0maLHPEyvBSw9/nAKds2JVFuD1VRHcRpNVMAbR1rr9r+irNSd2GmRhrT3ix9PppkatUrVc2McIX3PnDGbkg3LYg3XrMspgX9iYpZa5ClibHQJEj+QA2EQ9d9Fy/QAAFzZNPZbTSLYcox3YVMVLOmgRTflfu2srXfWhkzp+PJrvFOoN7TFAG7JEw5prNNVoxKwGnXBnJuS5BWpqtVfqqGBFwCYcnVNPJYYZlFTV2LosC2BDFt/negUzcfIAGXQyXSMMd1BgWuIztHtQrQPlhcMNaplA+QgMvRhXyBwzzLSY2Q36KOMuqVRgcWV7i0AQm4IFycY5Tf8zhmIDkuW/Wxo7jW5aQPbnp7LleQgIvTBRt1U/mwK0JSMFC8F0qOqfaXTp7TBXMfGhG8xZCAC8BFeRkL0ZVeWpX7pTobvcxXvuF7jcj6kZPlhhn19BIScDFCCNYsY3+LMMd1dR+EA2Q/PPM9m7ng200YuEhCAi5GiNUmXyUkLV84Y+PEUPh3Vyhfpx85VNTPa0jAOeFWbTNlv7kiAxJpDCTH9/h2sF2wbLNjYL7Nl2xft3jP5i4aKmCfs9EqJW5uNVZQDAEcS1bdnCB9x53LUYBNzQBqAHmGXQg2GDFIOUeW0NRH+gPXCMgCLzhExlL8wl7J8QLYyZdKoKFOJTIsaojl4DEm+X+RN9BQ6wuQBQaQayOXLljKYmrCTMZq8AfQ32VzgHSL2kJKVxjfq1i2rVh8vUay9haYi24AaLkPfSgy3LiwMnsFNBgUeE9WbtkNYmrN2gsYzCpm7hTJg6cdZO9pVkWfsGxwZCrzZRVdeY11H4DmCFjpu8qIAgywaHZlOcUxcfOvLCsjWLoaFd+pCMh2BdLezzrHa7wXMBdE1jyx5DltPjVH9Bml/i+fsBlbaZ0+XdXDMNA4X2ZRs85Nvj/xdbKmLt4LGDk2744CdLnV/Rqrok+90XzO3TXh0A7f/UdWxj7U89wu82vqMBD+fZIlxpStahvtPgAeT+rkPmkfOa2vgqUJjjzfYai4/gRsXzvxnENkz5KOOZH1ZiTq8DX/75sZ8//ic0Is9oUrvL+cL3gr4HVB6LnQXtcix6CM95CACa9pgg9MrDEkYMJrSMCE15CACa8hARNeQwImvIYETHgNCZjwGhIw4TUkYMJrSMCE1/w/kz3gIMG3ViwAAAAASUVORK5CYII=" alt="Graves Law logo" />
+              <p>Legal Defense • Filings • Litigation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-header">
+          <h2>Focused legal services for serious matters.</h2>
+          <p>Minimal noise. Strong positioning. Every service is designed around strategy, preparation, and protecting the client’s interests.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="icon">⚖</div>
+            <h3>Legal Defense</h3>
+            <p>Representation and defense strategy for clients facing criminal charges, investigations, or legal exposure within the State of San Andreas.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">§</div>
+            <h3>Court Filings</h3>
+            <p>Professional preparation and filing support for expungements, appeals, name changes, divorces, agreements, motions, and other legal documents.</p>
+          </article>
+
+          <article class="card">
+            <div class="icon">◆</div>
+            <h3>Civil Litigation</h3>
+            <p>Strategic claims, lawsuits, negotiations, settlement positioning, and courtroom preparation for clients whose rights or interests were violated.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="retainer" id="retainers">
+      <div class="container">
+        <div class="section-header">
+          <h2>Retainer programs built for serious protection.</h2>
+          <p>Whether you need personal representation or ongoing organizational counsel, Graves Law offers premium retainer coverage designed around responsiveness, preparation, and strategic legal support.</p>
+        </div>
+
+        <div class="grid-3" style="grid-template-columns: repeat(2, 1fr);">
+          <article class="card" style="min-height: auto; padding: 38px; background: linear-gradient(135deg, rgba(140,82,255,0.16), rgba(255,255,255,0.03)); border-color: rgba(140,82,255,0.28);">
+            <div class="icon">♛</div>
+            <h3>Individual Executive Retainer</h3>
+            <p style="margin-bottom: 24px;">
+              Priority legal support for individuals seeking ongoing representation, rapid response counsel, litigation preparation, filings, and direct strategic guidance.
+            </p>
+
+            <ul class="check-list">
+              <li><strong>Priority Access:</strong> Direct access to Graves Law for active legal matters and urgent situations.</li>
+              <li><strong>Comprehensive Representation:</strong> Criminal defense, filings, negotiations, and strategic litigation support.</li>
+              <li><strong>Legal Guidance:</strong> Ongoing advisory services designed to minimize legal exposure and strengthen positioning.</li>
+              <li><strong>Premium Client Handling:</strong> Retainer clients receive priority scheduling and accelerated response times.</li>
+            </ul>
+          </article>
+
+          <article class="card" style="min-height: auto; padding: 38px; background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(140,82,255,0.12)); border-color: rgba(140,82,255,0.28);">
+            <div class="icon">⚖</div>
+            <h3>Business & Organization Retainer</h3>
+            <p style="margin-bottom: 24px;">
+              Ongoing legal support for businesses and organizations requiring dependable counsel, contract assistance, compliance guidance, litigation defense, and operational risk management.
+            </p>
+
+            <ul class="check-list">
+              <li><strong>General Legal Counsel:</strong> Consistent legal support and consultation tailored to your organization.</li>
+              <li><strong>Contract Review & Negotiation:</strong> Drafting, reviewing, and negotiating agreements to protect business interests.</li>
+              <li><strong>Employment & Compliance Guidance:</strong> Advisory support regarding internal policies, disputes, and organizational liability.</li>
+              <li><strong>Litigation Defense:</strong> Strategic representation when legal challenges or claims arise.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="container split">
+        <div class="section-header">
+          <h2>Built for reputation, leverage, and results.</h2>
+          <p>Graves Law approaches every matter with preparation first. Whether the issue involves criminal defense, civil claims, or legal filings, the firm’s role is to create leverage, protect the client, and present the strongest possible position.</p>
+        </div>
+
+        <div>
+          <div class="stats">
+            <div class="stat">
+              <strong>01</strong>
+              <span>Strategy before action</span>
+            </div>
+            <div class="stat">
+              <strong>02</strong>
+              <span>Professional filings</span>
+            </div>
+            <div class="stat">
+              <strong>03</strong>
+              <span>Premium client service</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <div>
+            <h2>Ready to take the next step?</h2>
+            <p>Contact Graves Law to request representation, discuss a filing, or inquire about ongoing retainer coverage.</p>
+          </div>
+
+          <div class="contact-methods">
+            <div class="method">
+              <strong>Phillip Graves</strong>
+              Phone: 346-9085<br>
+              Email: hardstuckcat
+            </div>
+
+            <div class="method">
+              <strong>Bren Vaught</strong>
+              Phone: 321-8395<br>
+              Email: Limerick1.
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <span>© 2026 Graves Law. All rights reserved.</span>
+        <span>Where Strategy Wins</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
