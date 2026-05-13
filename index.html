@@ -131,10 +131,10 @@
 
     .hero {
       min-height: 100vh;
-      padding: 190px 20px 100px;
+      padding: 150px 20px 90px;
       background:
-        linear-gradient(90deg, rgba(8, 8, 12, 0.98) 0%, rgba(8, 8, 12, 0.82) 33%, rgba(8, 8, 12, 0.25) 72%, rgba(8, 8, 12, 0.72) 100%),
-        linear-gradient(180deg, rgba(8, 8, 12, 0.2), rgba(8, 8, 12, 0.95)),
+        linear-gradient(90deg, rgba(8, 8, 12, 0.97) 0%, rgba(8, 8, 12, 0.82) 34%, rgba(8, 8, 12, 0.30) 72%, rgba(8, 8, 12, 0.72) 100%),
+        linear-gradient(180deg, rgba(8, 8, 12, 0.18), rgba(8, 8, 12, 0.94)),
         url("hero-background.png");
       background-size: cover;
       background-position: center right;
@@ -145,11 +145,9 @@
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(circle at 18% 50%, rgba(140, 82, 255, 0.16), transparent 34%),
-        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-      background-size: auto, 52px 52px, 52px 52px;
+      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
       pointer-events: none;
     }
 
@@ -162,7 +160,7 @@
     }
 
     .hero-copy {
-      max-width: 690px;
+      max-width: 700px;
     }
 
     .eyebrow {
@@ -188,27 +186,23 @@
 
     h1 {
       font-family: Georgia, serif;
-      font-size: clamp(58px, 7vw, 118px);
-      line-height: 0.94;
+      font-size: clamp(58px, 7vw, 108px);
+      line-height: 0.92;
       letter-spacing: -4px;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
       text-shadow: 0 18px 55px rgba(0, 0, 0, 0.5);
     }
 
-    .accent-dot {
-      color: var(--purple);
-    }
-
     .hero-subline {
-      color: var(--purple) !important;
-      font-size: clamp(20px, 2.3vw, 29px) !important;
-      margin-bottom: 24px !important;
-      max-width: 720px !important;
+      color: var(--purple);
+      font-size: clamp(22px, 2vw, 30px);
+      margin-bottom: 26px;
+      font-weight: 500;
     }
 
     .hero p {
-      max-width: 760px;
-      color: rgba(255, 255, 255, 0.78);
+      max-width: 620px;
+      color: var(--muted);
       font-size: 18px;
       margin-bottom: 34px;
     }
@@ -252,6 +246,14 @@
     .btn-secondary:hover {
       border-color: var(--purple);
       transform: translateY(-2px);
+    }
+
+    .hero-card {
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025));
+      padding: 28px;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
     }
 
     .premium-logo-box {
@@ -528,6 +530,14 @@
     }
 
     @media (max-width: 900px) {
+      .hero {
+        background-position: 72% center;
+      }
+
+      .hero-copy {
+        max-width: 100%;
+      }
+
       .nav-inner {
         width: min(100% - 28px, 1180px);
         flex-direction: column;
@@ -575,37 +585,26 @@
         border-color: transparent !important;
       }
 
+      .hero-inner,
+      .split,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
       .hero {
         min-height: auto;
-        padding-top: 185px;
-        padding-bottom: 78px;
-        background-position: 67% center;
-      }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(8, 8, 12, 0.34);
-        pointer-events: none;
-      }
-
-      .hero-copy {
-        max-width: 100%;
+        padding-top: 165px;
+        padding-bottom: 70px;
       }
 
       h1 {
-        font-size: clamp(52px, 17vw, 74px);
-        letter-spacing: -2.4px;
+        font-size: clamp(46px, 15vw, 68px);
+        letter-spacing: -2px;
       }
 
       .hero p,
       .section-header p {
         font-size: 16px;
-      }
-
-      .hero-subline {
-        font-size: 20px !important;
       }
 
       .hero-actions {
@@ -616,10 +615,12 @@
         width: 100%;
       }
 
-      .hero-inner,
-      .split,
-      .contact-box {
-        grid-template-columns: 1fr;
+      .premium-logo-box {
+        min-height: 230px;
+      }
+
+      .hero-logo-img {
+        width: min(220px, 82%);
       }
 
       .grid-3,
@@ -663,8 +664,8 @@
       <div class="hero-inner">
         <div class="hero-copy">
           <div class="eyebrow"><span></span> Strategic legal counsel for San Andreas</div>
-          <h1>Law made simple<span class="accent-dot">.</span></h1>
-          <p class="hero-subline">Trusted legal counsel for San Andreas.</p>
+          <h1>Law made simple.</h1>
+          <div class="hero-subline">Trusted legal counsel for San Andreas.</div>
           <p>
             Graves Law provides professional representation, legal filings, criminal defense support, civil litigation strategy, and ongoing retainer counsel for individuals and organizations seeking serious legal protection.
           </p>
@@ -709,38 +710,72 @@
       <div class="container">
         <div class="section-header">
           <h2>Retainer programs built for serious protection.</h2>
-          <p>Whether you need personal representation or ongoing organizational counsel, Graves Law offers premium retainer coverage designed around responsiveness, preparation, and strategic legal support.</p>
+          <p>Designed for clients seeking long-term legal protection, strategic guidance, and dependable access to counsel.</p>
         </div>
 
         <div class="grid-3" style="grid-template-columns: repeat(2, 1fr);">
           <article class="card" style="min-height: auto; padding: 38px; background: linear-gradient(135deg, rgba(140,82,255,0.16), rgba(255,255,255,0.03)); border-color: rgba(140,82,255,0.28);">
             <div class="icon">♛</div>
             <h3>Individual Executive Retainer</h3>
+
+            <div style="margin: 10px 0 22px; display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 999px; border: 1px solid rgba(140,82,255,0.32); background: rgba(140,82,255,0.08); color: var(--purple); font-weight: 700; box-shadow: 0 0 28px rgba(140,82,255,0.12);">
+              $50,000 / Month
+            </div>
+
             <p style="margin-bottom: 24px;">
-              Priority legal support for individuals seeking ongoing representation, rapid response counsel, litigation preparation, filings, and direct strategic guidance.
+              Designed for individuals seeking direct access to legal counsel, rapid-response representation, and ongoing legal support.
             </p>
 
             <ul class="check-list">
-              <li><strong>Priority Access:</strong> Direct access to Graves Law for active legal matters and urgent situations.</li>
-              <li><strong>Comprehensive Representation:</strong> Criminal defense, filings, negotiations, and strategic litigation support.</li>
-              <li><strong>Legal Guidance:</strong> Ongoing advisory services designed to minimize legal exposure and strengthen positioning.</li>
-              <li><strong>Premium Client Handling:</strong> Retainer clients receive priority scheduling and accelerated response times.</li>
+              <li><strong>Direct Counsel Access:</strong> Ongoing communication and strategic legal guidance for active matters.</li>
+              <li><strong>Personal Representation:</strong> Defense support, filings, negotiations, and litigation preparation tailored to the individual client.</li>
+              <li><strong>Strategic Advisory:</strong> Ongoing legal guidance intended to reduce exposure and strengthen decision-making.</li>
+              <li><strong>Priority Handling:</strong> Expedited response times and premium client servicing.</li>
             </ul>
+
+            <div style="margin-top: 18px; padding: 22px; border-radius: 20px; border: 1px solid rgba(140,82,255,0.32); background: linear-gradient(135deg, rgba(140,82,255,0.14), rgba(255,255,255,0.03));">
+              <div style="color: var(--purple); font-size: 13px; letter-spacing: 1.4px; text-transform: uppercase; margin-bottom: 8px; font-weight: 800; text-shadow: 0 0 18px rgba(140,82,255,0.65);">Who This Is For</div>
+              
+              <ul style="list-style: none; display: grid; gap: 14px; margin: 0; padding: 0;">
+                <li style="display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.92); font-size: 16px; text-shadow: 0 0 16px rgba(255,255,255,0.12);"><span style="color: var(--purple); text-shadow: 0 0 18px rgba(140,82,255,0.85);">✦</span> Individuals requiring ongoing legal counsel</li>
+                <li style="display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.92); font-size: 16px; text-shadow: 0 0 16px rgba(255,255,255,0.12);"><span style="color: var(--purple); text-shadow: 0 0 18px rgba(140,82,255,0.85);">✦</span> Public figures</li>
+                <li style="display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.92); font-size: 16px; text-shadow: 0 0 16px rgba(255,255,255,0.12);"><span style="color: var(--purple); text-shadow: 0 0 18px rgba(140,82,255,0.85);">✦</span> High-profile individuals</li>
+                <li style="display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.92); font-size: 16px; text-shadow: 0 0 16px rgba(255,255,255,0.12);"><span style="color: var(--purple); text-shadow: 0 0 18px rgba(140,82,255,0.85);">✦</span> High-risk individuals</li>
+                <li style="display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.92); font-size: 16px; text-shadow: 0 0 16px rgba(255,255,255,0.12);"><span style="color: var(--purple); text-shadow: 0 0 18px rgba(140,82,255,0.85);">✦</span> Individuals seeking legal peace of mind</li>
+              </ul>
+            </div>
           </article>
 
           <article class="card" style="min-height: auto; padding: 38px; background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(140,82,255,0.12)); border-color: rgba(140,82,255,0.28);">
             <div class="icon">⚖</div>
             <h3>Business & Organization Retainer</h3>
+
+            <div style="margin: 10px 0 22px; display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 999px; border: 1px solid rgba(140,82,255,0.24); background: rgba(255,255,255,0.045); color: var(--white); font-weight: 700; box-shadow: 0 0 28px rgba(140,82,255,0.08);">
+              Request a Custom Quote
+            </div>
+
             <p style="margin-bottom: 24px;">
-              Ongoing legal support for businesses and organizations requiring dependable counsel, contract assistance, compliance guidance, litigation defense, and operational risk management.
+              Comprehensive organizational counsel designed for businesses requiring proactive legal oversight, operational protection, compliance guidance, and long-term strategic representation.
             </p>
 
             <ul class="check-list">
-              <li><strong>General Legal Counsel:</strong> Consistent legal support and consultation tailored to your organization.</li>
-              <li><strong>Contract Review & Negotiation:</strong> Drafting, reviewing, and negotiating agreements to protect business interests.</li>
-              <li><strong>Employment & Compliance Guidance:</strong> Advisory support regarding internal policies, disputes, and organizational liability.</li>
-              <li><strong>Litigation Defense:</strong> Strategic representation when legal challenges or claims arise.</li>
+              <li><strong>Organizational Counsel:</strong> Ongoing legal oversight and strategic consultation tailored to business operations.</li>
+              <li><strong>Contract & Risk Management:</strong> Agreement review, negotiations, and operational guidance designed to protect the organization.</li>
+              <li><strong>Compliance & Internal Matters:</strong> Advisory support regarding policies, disputes, employee concerns, and organizational liability.</li>
+              <li><strong>Institutional Representation:</strong> Litigation strategy and defense support for matters affecting the organization.</li>
             </ul>
+
+            <div style="margin-top: 18px; padding: 22px; border-radius: 20px; border: 1px solid rgba(140,82,255,0.38); background: linear-gradient(135deg, rgba(140,82,255,0.18), rgba(255,255,255,0.035));">
+              <div style="color: var(--purple); font-size: 13px; letter-spacing: 1.4px; text-transform: uppercase; margin-bottom: 8px; font-weight: 700;">Employee Retainer Program</div>
+              <p style="margin-bottom: 14px; color: var(--muted);">
+                Businesses may extend legal coverage to approved employees, creating a premium benefit that helps protect the people behind the organization.
+              </p>
+              <ul class="check-list">
+                <li><strong>Employee Coverage:</strong> Optional legal support access for qualifying staff or members.</li>
+                <li><strong>Stronger Retention Tool:</strong> Adds value to your organization by offering legal protection as a benefit.</li>
+                <li><strong>Priority Handling:</strong> Covered employees may receive faster access through the organization’s retainer relationship.</li>
+              </ul>
+            </div>
           </article>
         </div>
       </div>
@@ -793,7 +828,6 @@
               Email: Limerick1.
             </div>
           </div>
-        </div>
         </div>
       </div>
     </section>
