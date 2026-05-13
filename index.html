@@ -131,11 +131,13 @@
 
     .hero {
       min-height: 100vh;
-      padding: 150px 20px 90px;
+      padding: 190px 20px 100px;
       background:
-        radial-gradient(circle at 70% 20%, rgba(140, 82, 255, 0.28), transparent 32%),
-        radial-gradient(circle at 20% 80%, rgba(216, 195, 138, 0.09), transparent 30%),
-        linear-gradient(135deg, #08080c 0%, #111119 55%, #08080c 100%);
+        linear-gradient(90deg, rgba(8, 8, 12, 0.98) 0%, rgba(8, 8, 12, 0.82) 33%, rgba(8, 8, 12, 0.25) 72%, rgba(8, 8, 12, 0.72) 100%),
+        linear-gradient(180deg, rgba(8, 8, 12, 0.2), rgba(8, 8, 12, 0.95)),
+        url("hero-background.png");
+      background-size: cover;
+      background-position: center right;
       position: relative;
     }
 
@@ -143,9 +145,11 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 52px 52px;
-      mask-image: linear-gradient(to bottom, black, transparent 90%);
+      background:
+        radial-gradient(circle at 18% 50%, rgba(140, 82, 255, 0.16), transparent 34%),
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: auto, 52px 52px, 52px 52px;
       pointer-events: none;
     }
 
@@ -154,10 +158,11 @@
       z-index: 2;
       width: min(1180px, 100%);
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.12fr 0.88fr;
-      gap: 60px;
-      align-items: center;
+      display: block;
+    }
+
+    .hero-copy {
+      max-width: 690px;
     }
 
     .eyebrow {
@@ -183,15 +188,27 @@
 
     h1 {
       font-family: Georgia, serif;
-      font-size: clamp(48px, 7vw, 86px);
-      line-height: 0.98;
-      letter-spacing: -3px;
+      font-size: clamp(58px, 7vw, 118px);
+      line-height: 0.94;
+      letter-spacing: -4px;
       margin-bottom: 24px;
+      text-shadow: 0 18px 55px rgba(0, 0, 0, 0.5);
+    }
+
+    .accent-dot {
+      color: var(--purple);
+    }
+
+    .hero-subline {
+      color: var(--purple) !important;
+      font-size: clamp(20px, 2.3vw, 29px) !important;
+      margin-bottom: 24px !important;
+      max-width: 720px !important;
     }
 
     .hero p {
-      max-width: 620px;
-      color: var(--muted);
+      max-width: 760px;
+      color: rgba(255, 255, 255, 0.78);
       font-size: 18px;
       margin-bottom: 34px;
     }
@@ -235,14 +252,6 @@
     .btn-secondary:hover {
       border-color: var(--purple);
       transform: translateY(-2px);
-    }
-
-    .hero-card {
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025));
-      padding: 28px;
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
     }
 
     .premium-logo-box {
@@ -566,26 +575,37 @@
         border-color: transparent !important;
       }
 
-      .hero-inner,
-      .split,
-      .contact-box {
-        grid-template-columns: 1fr;
-      }
-
       .hero {
         min-height: auto;
-        padding-top: 165px;
-        padding-bottom: 70px;
+        padding-top: 185px;
+        padding-bottom: 78px;
+        background-position: 67% center;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(8, 8, 12, 0.34);
+        pointer-events: none;
+      }
+
+      .hero-copy {
+        max-width: 100%;
       }
 
       h1 {
-        font-size: clamp(46px, 15vw, 68px);
-        letter-spacing: -2px;
+        font-size: clamp(52px, 17vw, 74px);
+        letter-spacing: -2.4px;
       }
 
       .hero p,
       .section-header p {
         font-size: 16px;
+      }
+
+      .hero-subline {
+        font-size: 20px !important;
       }
 
       .hero-actions {
@@ -596,12 +616,10 @@
         width: 100%;
       }
 
-      .premium-logo-box {
-        min-height: 230px;
-      }
-
-      .hero-logo-img {
-        width: min(220px, 82%);
+      .hero-inner,
+      .split,
+      .contact-box {
+        grid-template-columns: 1fr;
       }
 
       .grid-3,
@@ -643,24 +661,16 @@
 
     <header class="hero" id="top">
       <div class="hero-inner">
-        <div>
+        <div class="hero-copy">
           <div class="eyebrow"><span></span> Strategic legal counsel for San Andreas</div>
-          <h1>Law made simple.</h1>
+          <h1>Law made simple<span class="accent-dot">.</span></h1>
+          <p class="hero-subline">Trusted legal counsel for San Andreas.</p>
           <p>
             Graves Law provides professional representation, legal filings, criminal defense support, civil litigation strategy, and ongoing retainer counsel for individuals and organizations seeking serious legal protection.
           </p>
           <div class="hero-actions">
             <a href="#contact" class="btn btn-primary">Schedule Consultation</a>
             <a href="#services" class="btn btn-secondary">View Services</a>
-          </div>
-        </div>
-
-        <div class="hero-card">
-          <div class="premium-logo-box">
-            <div class="inner">
-              <img class="hero-logo-img" src="Graves_Logo_Purple-Stacked.png" alt="Graves Law logo" />
-              <p>Legal Defense • Filings • Litigation</p>
-            </div>
           </div>
         </div>
       </div>
